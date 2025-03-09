@@ -1,0 +1,40 @@
+﻿version: '3'
+
+services:
+  umbraco-db:
+    container_name: umbraco-db-mssql-2017
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=eLp3^Mj3yOoKQKaIgw
+    networks:
+      - umbraco-network
+    volumes:
+      - umbraco.db:/var/opt/mssql/data
+    ports:
+      - '1433:1433'  
+    restart: always
+
+  umbraco-netcore:
+    container_name: umbraco-netcore
+    depends_on:
+      - umbraco-db
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - umbraco-network
+    volumes:
+      - umbraco-data:/app/data
+
+volumes:
+  umbraco.db:
+  umbraco-data:
+
+networks:
+  umbraco-network:
+    driver: bridge
