@@ -19,3 +19,5 @@ Get Startet Umbraco Docker.
   CREATE DATASABE portafolio;
   GO
 ```
+
+![ScreenShot]([https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png](https://github.com/valenzuela21/umbraco-docker/blob/master/screenshot.png?raw=true))
